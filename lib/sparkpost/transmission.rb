@@ -20,7 +20,7 @@ module SparkPost
       request(endpoint, @api_key, data)
     end
 
-    def send_message(to, from, subject, html_message = nil, **options)
+    def send_message(to, from, subject, html_message = nil, options={})
       # TODO: add validations for to, from
       html_message = content_from(options, :html) || html_message
       text_message = content_from(options, :text) || options[:text_message]

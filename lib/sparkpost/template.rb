@@ -17,7 +17,7 @@ module SparkPost
       @base_endpoint = "#{@api_host}/api/v1/templates"
     end
 
-    def create(id, from = nil, subject = nil, html = nil, **options)
+    def create(id, from = nil, subject = nil, html = nil, options = {})
       data = deep_merge(
         payload_from_args(id, from, subject, html),
         payload_from_options(options)
@@ -25,7 +25,7 @@ module SparkPost
       request(endpoint, @api_key, data, 'POST')
     end
 
-    def update(id, from = nil, subject = nil, html = nil, **options)
+    def update(id, from = nil, subject = nil, html = nil, options = {})
       params = {}
       copy_value(options, :update_published, params, :update_published)
       data = deep_merge(
@@ -73,7 +73,7 @@ module SparkPost
       model
     end
 
-    def payload_from_options(**options)
+    def payload_from_options(options = {})
       model = { content: { from: {} }, options: {} }
 
       # Mapping optional arguments to root
